@@ -28,6 +28,11 @@ function main() {
         setupSwap
     fi
 
+    setupTimezone
+
+    echo "Configuring System Time... "
+    configureNTP
+
     cleanup
 
     echo "Setup Done! Log file is located at ${output_file}"
@@ -60,13 +65,13 @@ function logTimestamp() {
 }
 
 function setupTimezone() {
-    echo -ne "Enter the timezone for the server (Default is 'Asia/Singapore'):\n" >&3
+    echo -ne "Enter the timezone for the server (Default is 'Asia/Singapore'):\n"
     read -r timezone
     if [ -z "${timezone}" ]; then
         timezone="Asia/Singapore"
     fi
     setTimezone "${timezone}"
-    echo "Timezone is set to $(cat /etc/timezone)" >&3
+    echo "Timezone is set to $(cat /etc/timezone)"
 }
 
 main
