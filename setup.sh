@@ -20,16 +20,13 @@ output_file="output.log"
 function main() {
     echo 'Kajaaa...'
 
+    if hasSwap; then
+        echo 'has swap'
+    fi
+
     if ! hasSwap; then
         setupSwap
     fi
-
-    setupTimezone
-
-    echo "Configuring System Time... " >&3
-    configureNTP
-
-    # sudo service ssh restart
 
     cleanup
 
